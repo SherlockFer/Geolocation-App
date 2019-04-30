@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block">
+            <p>Left panel content goes here</p>
+        </div>
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Travel Pal App</div>
+                    <div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+
+                    <div class="swiper-container swiper-init demo-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" id="screen0">
+                                <div class="page-content">
+                                    <div class="content-block">
+                                        <div id="Home">
+                                            <div id="welcome">Welcome</div>
+                                            <div id="welcome">Travel Pal App</div>
+
+                                            <div id="city">City</div>
+
+
+                                            <div class="block">
+                                                <p class="segmented segmented-round">
+
+                                                    <button id="buttonWelcome" class="col button button-fill button-round"
+                                                        onclick="goScreen(1)">Start</button>
+
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="swiper-slide" id="screen1">
+                                <div class="page-content">
+                                    <div class="content-block">
+                                        <div id="Home">
+                                            <div id="welcome">Welcome</div>
+                                            <div id="welcome">Travel Pal App</div>
+
+                                            <div id="cityWelcome">City</div>
+                                            <div>Today</div>
+                                            <div id="temperature">°C</div>
+                                            <div id="condition">Temperature condition</div>
+
+                                            <div class="block">
+                                                <p class="segmented segmented-round">
+
+                                                    <button id="buttons" class="col button button-fill button-round"
+                                                        onclick="goScreen(2)">click to see current location</button>
+                                                    <button id="buttons" class="col button button-fill button-round"
+                                                        onclick="goScreen(3)">click to see foreign currency
+                                                        exchange</button>
+                                                    <button id="buttons" class="col button button-fill button-round"
+                                                        onclick="goScreen(4)">click to see the current weather</button>
+                                                        <button id="buttons" class="col button button-fill button-round"
+                                                        onclick="readFile()">file</button>
+                                                        <button onclick=""> Read </button>
+
+                            <input type="text" id="input"> </input>
+
+                            <button onclick="readInput()"> Write </button>
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="swiper-slide" id="screen2">
+                                <div class="page-content">
+                                    <!-- Start buuton to home -->
+                                    <div class="block">
+                                        <p class="segmented segmented-round">
+
+                                            <button id="buttonHome" class="col button button-fill button-round color-orange"
+                                                onclick="goScreen(1)">Home</button>
+
+                                        </p>
+
+                                    </div>
+                                    <!-- End button to home -->
+                                    <div class="content-block">
+                                        <div id="welcome">Travel Pal App</div>
+                                        <div id="theme">Current location details</div>
+                                        <div id="location">Location</div>
+                                        <div id="namecode">Code Alpha: </div>
+                                        <div id="isocode">isocode</div>
+                                        <div id="namecurre">Currency: </div>
+                                        <div id="currency">currency</div>
+                                        <div id="myMap2"></div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="swiper-slide" id="screen3">
+                                <div class="page-content">
+                                    <!-- Start buuton to home -->
+                                    <div class="block">
+                                        <p class="segmented segmented-round">
+
+                                            <button id="buttonHome" class="col button button-fill button-round color-orange"
+                                                onclick="goScreen(1)">Home</button>
+
+                                        </p>
+
+                                    </div>
+                                    <!-- End button to home -->
+                                    <div class="content-block">
+                                        <div id="welcome">Travel Pal App</div>
+                                        <div id="theme">Currency Money Exchange</div>
+                                        <div class="block">
+                                            <!-- user has to type an amount -->
+                                            <div>type your amount:</br><input type=number id="number"></input></div>
+
+
+
+                                            <!-- buttons to make the convertion  -->
+                                            <div class="block">
+                                                <div class="row">
+                                                    <button class="col button button-fill button-round" id="buttons2"
+                                                        onclick="convertA()">
+                                                        From EUR to USD </button>
+                                                    <button class="col button button-fill button-round" id="buttons2"
+                                                        onclick="convertB()">
+                                                        From USD to EUR </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- result of your request -->
+                                            <div>your result is</div>
+
+                                            <div id="result"> Waiting...</div>
+
+
+                                            <div class="row">
+                                                <button class="col button button-fill button-round" id="buttons2"
+                                                    onclick="convert(3)"> Show me the current rate </button>
+                                            </div>
+                                        </div>
+                                        <div class="rateA">
+                                            <!-- see the live rates from dollars to euros -->
+                                            <div id="text"> Current rate (USD to EUR):</div>
+                                            <div id="rateA"> Waiting for the rate USD to EUR...</div>
+                                        </div>
+                                        <div class="rateB">
+                                            <!-- see the live rates from euros to dollars -->
+                                            <div id="text"> Current rate from (EUR to USD)</div>
+                                            <div id="rateB"> Waiting for the rate EUR to USD...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" id="screen4">
+                                <div class="page-content">
+                                    <!-- Start buuton to home -->
+                                    <div class="block">
+                                            <p class="segmented segmented-round">
+    
+                                                <button id="buttonHome" class="col button button-fill button-round color-orange"
+                                                    onclick="goScreen(1)">Home</button>
+    
+                                            </p>
+    
+                                        </div>
+                                        <!-- End button to home -->
+                                        <div class="content-block">
+                                        <div id="welcome">Travel Pal App</div>
+                                        <div id="theme">Weather</div>
+                                        <div id="temperatureC">Temperature</div>
+                                        <div id="apartemperature">Temperature</div>
+                                        <div id="icon">Icon</div>
+                                        <div id="cityWeather">Data</div>
+                                        <div class="block">
+                                            </br>
+                                            <div class="w3-container">
+                                                <div>Currently Weather Details</div>
+
+                                                <table class="w3-table-all w3-hoverable">
+                                                    <tr>
+                                                        <th>CATEGORY</th>
+                                                        <th>DATA</th>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Humedity</td>
+                                                        <td id="humidity"></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Summary</td>
+                                                        <td id="summary"></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pressure</td>
+                                                        <td id="pressure"></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Chance of rain</td>
+                                                        <td id="precipProbability"></td>
+
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div id="today">Today</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" id="screen3">
+                                <div class="page-content">
+                                        <button id="buttonPic" onclick="pics()" >Picture</button>
+                                        <imgid="myImage" height="50%" width="50%"></img>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Scrollable page content -->
+
+            </div>
+        </div>
+        <!-- Bottom Toolbar-->
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <!-- Toolbar links -->
+                <a href="#" class="link">Link 1</a>
+                <a href="#" class="link">Link 2</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"> -->
+    <!-- </script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
