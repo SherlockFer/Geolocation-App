@@ -295,4 +295,4 @@ function convert(id){
 
   function initMap() {} // now it IS a function and it is in global
   
-  
+  var amilcar;
