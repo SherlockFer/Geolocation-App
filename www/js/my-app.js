@@ -295,4 +295,92 @@ function convert(id){
 
   function initMap() {} // now it IS a function and it is in global
   
-  var amilcar;
+
+  //Picture
+  function pics(){
+    navigator.camera.getPicture(cameraCallback, onError);
+    }
+    function cameraCallback(imageData) {
+    var image = document.getElementById("myImage");
+    image.src= imageData;
+    }
+
+
+//files
+function tryingFile(){
+
+  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemCallback, onError);
+ 
+}
+
+function fileSystemCallback(fs){
+
+  // Name of the file I want to create
+  var fileToCreate = "newPersistentFile.txt";
+
+  // Opening/creating the file
+  fs.root.getFile(fileToCreate, fileSystemOptionals, getFileCallback, onError);
+}
+
+var fileSystemOptionals = { create: true, exclusive: false };
+
+function getFileCallback(fileEntry){
+  
+  var dataObj = new Blob(['Hello'], { type: 'text/plain' });
+  // Now decide what to do
+  // Write to the file
+  writeFile(fileEntry, dataObj);
+
+  // Or read the file
+  readFile(fileEntry);
+}
+
+// Let's write some files
+function writeFile(fileEntry, dataObj) {
+
+  // Create a FileWriter object for our FileEntry (log.txt).
+  fileEntry.createWriter(function (fileWriter) {
+
+      // If data object is not passed in,
+      // create a new Blob instead.
+      if (!dataObj) {
+          dataObj = new Blob(['Hello'], { type: 'text/plain' });
+      }
+
+      fileWriter.write(dataObj);
+
+      fileWriter.onwriteend = function() {
+          console.log("Successful file write...");
+      };
+
+      fileWriter.onerror = function (e) {
+          console.log("Failed file write: " + e.toString());
+      };
+
+  });
+}
+
+// Let's read some files
+function readFile(fileEntry) {
+
+  // Get the file from the file entry
+  fileEntry.file(function (file) {
+      
+      // Create the reader
+      var reader = new FileReader();
+      reader.readAsText(file);
+
+      reader.onloadend = function() {
+
+          console.log("Successful file read: " + this.result);
+          console.log("file path: " + fileEntry.fullPath);
+
+      };
+
+  }, onError);
+}
+
+function onError(msg){
+  console.log(msg);
+}
+

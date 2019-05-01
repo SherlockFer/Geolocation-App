@@ -34,9 +34,9 @@
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -83,22 +83,15 @@
                                         <div id="Home">
                                             <div id="welcome">Welcome</div>
                                             <div id="welcome">Travel Pal App</div>
-
                                             <div id="city">City</div>
-
-
                                             <div class="block">
                                                 <p class="segmented segmented-round">
-
                                                     <button id="buttonWelcome" class="col button button-fill button-round"
                                                         onclick="goScreen(1)">Start</button>
-
                                                 </p>
-
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="swiper-slide" id="screen1">
@@ -107,7 +100,6 @@
                                         <div id="Home">
                                             <div id="welcome">Welcome</div>
                                             <div id="welcome">Travel Pal App</div>
-
                                             <div id="cityWelcome">City</div>
                                             <div>Today</div>
                                             <div id="temperature">°C</div>
@@ -117,19 +109,14 @@
                                                 <p class="segmented segmented-round">
 
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(2)">click to see current location</button>
+                                                        onclick="goScreen(2)">click here to see current location</button>
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(3)">click to see foreign currency
+                                                        onclick="goScreen(3)">click here to see foreign currency
                                                         exchange</button>
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(4)">click to see the current weather</button>
-                                                        <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="readFile()">file</button>
-                                                        <button onclick=""> Read </button>
-
-                            <input type="text" id="input"> </input>
-
-                            <button onclick="readInput()"> Write </button>
+                                                        onclick="goScreen(4)">click here to see the current weather</button>
+                                                    <button id="buttons" class="col button button-fill button-round"
+                                                        onclick="goScreen(5)">Click here to take a picture</button>
                                                 </p>
 
                                             </div>
@@ -142,12 +129,15 @@
                             <div class="swiper-slide" id="screen2">
                                 <div class="page-content">
                                     <!-- Start buuton to home -->
-                                    <div class="block">
+                                    <div class="block ">
+                                        
                                         <p class="segmented segmented-round">
 
                                             <button id="buttonHome" class="col button button-fill button-round color-orange"
-                                                onclick="goScreen(1)">Home</button>
-
+                                                onclick="goScreen(1)"><i class="fas fa-home"></i></button>
+                                            <button id="buttonSave" class="col button button-fill button-round color-green"
+                                                onclick="goScreen(1)"><i class="fas fa-save"></i></button>
+                                            
                                         </p>
 
                                     </div>
@@ -176,8 +166,9 @@
                                         <p class="segmented segmented-round">
 
                                             <button id="buttonHome" class="col button button-fill button-round color-orange"
-                                                onclick="goScreen(1)">Home</button>
-
+                                                onclick="goScreen(1)"><i class="fas fa-home"></i></button>
+                                                <button id="buttonSave" class="col button button-fill button-round color-green"
+                                                onclick="goScreen(1)"><i class="fas fa-save"></i></button>
                                         </p>
 
                                     </div>
@@ -232,14 +223,16 @@
                                     <!-- Start buuton to home -->
                                     <div class="block">
                                             <p class="segmented segmented-round">
-    
                                                 <button id="buttonHome" class="col button button-fill button-round color-orange"
-                                                    onclick="goScreen(1)">Home</button>
+                                                    onclick="goScreen(1)"><i class="fas fa-home"></i></button>
+                                                    <button id="buttonSave" class="col button button-fill button-round color-green"
+                                                    onclick="goScreen(1)"><i class="fas fa-save"></i></button>
     
-                                            </p>
-    
+                                                </p>
+
                                         </div>
                                         <!-- End button to home -->
+
                                         <div class="content-block">
                                         <div id="welcome">Travel Pal App</div>
                                         <div id="theme">Weather</div>
@@ -285,10 +278,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide" id="screen3">
+                            <!-- take a Picture -->  
+                            <div class="swiper-slide" id="screen5">
                                 <div class="page-content">
-                                        <button id="buttonPic" onclick="pics()" >Picture</button>
-                                        <imgid="myImage" height="50%" width="50%"></img>
+                                    <!-- Start buuton to home -->
+                                    <div class="block">
+                                        <p class="segmented segmented-round">
+                                            <button id="buttonHome" class="col button button-fill button-round color-orange"
+                                            onclick="goScreen(1)"><i class="fas fa-home"></i></button>
+                                            <button id="buttonSave" class="col button button-fill button-round color-green"
+                                            onclick="goScreen(1)"><i class="fas fa-save"></i></button>
+                                        </p>
+                                     </div>
+                                    <!-- End button to home -->
+                                        <div id="welcome">Travel Pal App</div>
+                                        <div id="theme">Picture</div>
+                                        <button id="buttonpicture" class="col button button-fill button-round"
+                                        onclick="pics()">click to take a picture</button>
+                                        <img id="myImage" height="50%" width="50%"></img>
                                 </div>
                             </div>
                         </div>
@@ -316,8 +323,8 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"> -->
-    <!-- </script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap">
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 

@@ -16,7 +16,7 @@
 
 #welcome {
     text-align: center;
-    font-size: 15px;
+    font-size: 25px;
 }
 
 #theme,#icon,#apartemperature,#temperatureC{
@@ -53,16 +53,25 @@
     font-size: 20px;
     font-weight: 50;
     margin-top:200px;
-    }
+}
     
 
 #buttons{
-height: 55px;
-width:100%;
-font-size: 20px;
-font-weight: 50;
-margin-top:20px;
+    height: 40px;
+    width:100%;
+    font-size: 18px;
+    font-weight: 50;
+    margin-top:20px;
 }
+
+#buttonpicture{
+    height: 30px;
+    width:80%;
+    font-size: 20px;
+    font-weight: 50;
+    margin:0px auto;
+    margin-top:30px;
+    }
 
 #buttons2{
     height: 45px;
@@ -72,14 +81,13 @@ margin-top:20px;
     margin-top:20px;
 }
 
-#buttonHome{
+#buttonHome,#buttonSave{
+    display:inline-block;
     height: 40px;
     width:20%;
     font-size: 18px;
     font-weight: 30;
     margin-top:0px;
-
-    float:right;
 }
 
 .demo-swiper .swiper-slide {
@@ -184,4 +192,11 @@ margin-top:20px;
     font-size: 15px; 
 }
 
+#buttonHome{
+    float:left;
+}
+
+#buttonSave{
+  float:right;
+}
 /* float button */
