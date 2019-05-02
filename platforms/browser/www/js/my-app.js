@@ -301,7 +301,7 @@ function convert(id){
         document.getElementById('rateB').innerHTML=parseFloat(Math.round(1/rate * 100) / 100).toFixed(2);
         
          //global content
-         textToWrite=textToWrite+" Currency rate exchange: 1 " +myIisocode+" = "+ resultA+"USD";
+         textToWrite=textToWrite+" Currency rate exchange: 1 " +myIsocode+" = "+ resultA+"USD";
     
     } else if (request.status <= 500){ 
         // We reached our target server, but it returned an error
