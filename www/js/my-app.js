@@ -14,6 +14,7 @@ var mainView = myApp.addView('.view-main', {
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
+    tryingFile();
 
 });
 
@@ -46,20 +47,42 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 currentLoc();
 weather();
 
-
+//Global variables write and read files
+var fileEntryGlobal;
+var contentGlobal = "";
+var read=false;
+var date;
+var textToWrite;
+var deleteRecord=false;//variable to delete info trips
+var localCurrency="";
+var lat;
+var lon;
+var travel="";
 
 function currentLoc(){
-    navigator.geolocation.getCurrentPosition(success, error);
 
+    navigator.geolocation.getCurrentPosition(success, error);
     function success(position) {
-    var lat2 = position.coords.latitude;
-    var lon2 = position.coords.longitude;
-    //var lat2=+document.getElementById('latcall').value;
-    //var lon2=+document.getElementById('loncall').value;
+      lat = position.coords.latitude;
+      lon = position.coords.longitude;
+
+      //lines of code to developer in order to show info in other country
+      if(travel=="Peru"){
+       lat= -12.04318;
+       lon =-77.02824;
+      }
+      if(travel=="Brasil"){
+       lat= -15.826691;
+       lon=-47.921822;
+      }
+      if(travel== "Australia"){
+        lat= -33.856159;
+        lon=151.215256;
+      }
 
     var apikey = 'c9f0eeb45f7a47448d8a056a87452acd';
-    var latitude = lat2;
-    var longitude = lon2;
+    var latitude = lat;
+    var longitude = lon;
     var api_url = 'https://api.opencagedata.com/geocode/v1/json';
   
     var request_url = api_url+ '?'+ 'key=' +encodeURIComponent(apikey)+ '&q=' + encodeURIComponent(latitude) + ',' + encodeURIComponent(longitude)+ '&pretty=1' + '&no_annotations=0';
@@ -83,12 +106,14 @@ function currentLoc(){
         //fill in data to show the current position
         var flag = data.results[0].annotations.flag;
         var address=data.results[0].formatted;
+        date=data.timestamp.created_http;
         var postcode=data.results[0].components.postcode;
         var city = data.results[0].components.city;
         var country = data.results[0].components.country;
         var currency = data.results[0].annotations.currency.name;
         var isocode = data.results[0].annotations.currency.iso_code;
-        
+
+        localCurrency=data.results[0].annotations.currency.iso_code;
 
         // Formattng data to put it on the front end
         var location = "</br>Country: " + country +flag+"</br>City: " + city +"</br>PostCode: " + postcode +"</br>house number: " + address ;
@@ -101,10 +126,17 @@ function currentLoc(){
         document.getElementById('location').innerHTML = location;
         document.getElementById('currency').innerHTML = currency;
         document.getElementById('isocode').innerHTML = isocode;
-
+        document.getElementById('date').innerHTML = date;
         document.getElementById('cityWeather').innerHTML = weatherLocation;
 
-  
+        //to change bottons and values to local Currency
+        document.getElementById('buttons2').innerHTML = "From "+isocode+" to USD";
+        document.getElementById('buttons3').innerHTML = "From USD to "+isocode;
+        document.getElementById('textB').innerHTML = "Current rate ("+isocode+" to USD)";
+        document.getElementById('textA').innerHTML = "Current rate (USD to "+isocode+")";
+
+        //global content
+        textToWrite="\nDate: "+date+"\n Country: "+country+"\nCity: "+city+"\nCurrency: "+currency;
       } else if (request.status <= 500){ 
       // We reached our target server, but it returned an error
                              
@@ -126,7 +158,7 @@ function currentLoc(){
     //to display the map for the current location
 
     // Defining a position to display
-    var myposition = {lat: lat2, lng: lon2};
+    var myposition = {lat: lat, lng: lon};
     
     // Creating the map, centred on the position 
     // defined above
@@ -162,6 +194,21 @@ function weather() {
   function success(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
+      
+      //lines of code to developer in order to show info in other country
+      if(travel=="Peru"){
+        latitude= -12.04318;
+        longitude =-77.02824;
+      }
+      if(travel=="Brazil"){
+        lat= -15.826691;
+        lon=-47.921822;
+       }
+
+       if(travel== "Australia"){
+        lat= -33.856159;
+        lon=151.215256;
+      }
 
     jQuery.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
       console.log(data);
@@ -179,7 +226,7 @@ function weather() {
         var icon = data.currently.icon;
         document.getElementById('icon').innerHTML = icon;
 
-        var condition=data.minutely.summary;
+        var condition=data.hourly.summary;
         document.getElementById('condition').innerHTML = condition;
 
         var humidity = data.currently.humidity;
@@ -196,14 +243,14 @@ function weather() {
 
         var dayly= data.daily.summary;
         document.getElementById('today').innerHTML = "today : "+dayly;
+
+        textToWrite=textToWrite+" Temperature: "+centtempform +' °C'+" Feels like: "+centtempform2+' °C';
     });
   }
 
   function error() {
     location.innerHTML = "Unable to retrieve your location";
   }
-
-  //location.innerHTML = "Locating...";
 }
 
 
@@ -253,6 +300,8 @@ function convert(id){
         document.getElementById('rateA').innerHTML=parseFloat(Math.round(1*rate * 100) / 100).toFixed(2);
         document.getElementById('rateB').innerHTML=parseFloat(Math.round(1/rate * 100) / 100).toFixed(2);
         
+         //global content
+         textToWrite=textToWrite+" Currency rate exchange: 1 " +myIisocode+" = "+ resultA+"USD";
     
     } else if (request.status <= 500){ 
         // We reached our target server, but it returned an error
@@ -270,11 +319,7 @@ function convert(id){
           console.log("unable to connect to server");        
       };
       request.send();
-    
-    
     }
-
-        //document.getElementById('result').innerHTML=(data.quotes.USDEUR)*numberfrom+' euros';
 
     function convertA(){
         convert(1);
@@ -306,7 +351,17 @@ function convert(id){
     }
 
 
+function readWrite(){
+  read=true;
+}
+
 //files
+
+function readWrite(){
+  read=true;
+  tryingFile();
+}
+
 function tryingFile(){
 
   window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemCallback, onError);
@@ -316,7 +371,7 @@ function tryingFile(){
 function fileSystemCallback(fs){
 
   // Name of the file I want to create
-  var fileToCreate = "newPersistentFile.txt";
+  var fileToCreate = "PersistentFile.txt";
 
   // Opening/creating the file
   fs.root.getFile(fileToCreate, fileSystemOptionals, getFileCallback, onError);
@@ -324,22 +379,31 @@ function fileSystemCallback(fs){
 
 var fileSystemOptionals = { create: true, exclusive: false };
 
-function getFileCallback(fileEntry){
-  
-  var dataObj = new Blob(['Hello'], { type: 'text/plain' });
-  // Now decide what to do
-  // Write to the file
-  writeFile(fileEntry, dataObj);
+var fileEntryGlobal;
 
-  // Or read the file
-  readFile(fileEntry);
+
+function getFileCallback(fileEntry){
+
+  fileEntryGlobal = fileEntry;
+
+
+}
+
+function readInput(){
+  writeFile(textToWrite);
 }
 
 // Let's write some files
-function writeFile(fileEntry, dataObj) {
+function writeFile(newText) {
+//false = Dont show infor
+  readFile(false);
+
+  contentGlobal = contentGlobal + newText;
+
+  var dataObj = new Blob([contentGlobal], { type: 'text/plain' });
 
   // Create a FileWriter object for our FileEntry (log.txt).
-  fileEntry.createWriter(function (fileWriter) {
+  fileEntryGlobal.createWriter(function (fileWriter) {
 
       // If data object is not passed in,
       // create a new Blob instead.
@@ -358,29 +422,70 @@ function writeFile(fileEntry, dataObj) {
       };
 
   });
+  document.getElementById('data').innerHTML="Successful data saved"; 
+  document.getElementById('input').innerHTML=""; 
 }
 
 // Let's read some files
-function readFile(fileEntry) {
+function readFile(show) {
 
   // Get the file from the file entry
-  fileEntry.file(function (file) {
-      
+  fileEntryGlobal.file(function (file) {
       // Create the reader
       var reader = new FileReader();
       reader.readAsText(file);
-
+  
       reader.onloadend = function() {
 
           console.log("Successful file read: " + this.result);
-          console.log("file path: " + fileEntry.fullPath);
-
+          console.log("file path: " + fileEntryGlobal.fullPath);
+          contentGlobal = this.result;
+          if (show==true){
+          document.getElementById('data').innerHTML="Successful data read";  
+            if(contentGlobal.length>0){
+              document.getElementById('input').innerHTML=contentGlobal;
+            }else{
+              document.getElementById('input').innerHTML="No data to show";
+              document.getElementById('data').innerHTML="Read data";  
+            }
+          }
       };
-
   }, onError);
 }
+
+
+
 
 function onError(msg){
   console.log(msg);
 }
 
+
+function deleteRecords(){
+
+  var r = confirm("Delete Data? and reloaded app?\nEither OK or Cancel.\n");
+  if (r == true) {
+      // access the persistent file system
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+        
+        // get the file named "PersistentFile.txt"
+        fs.root.getFile("PersistentFile.txt", { create: false }, function(fileEntry) {
+          
+          // attempt to remove the file if it exists
+          fileEntry.remove(function() {
+            // delete successful
+            console.info('Config file has been deleted successfully.');
+          }, function(error) {
+            // delete failed
+            console.error('Could not delete Config file. ' + JSON.stringify( error ));
+          });  
+        });   
+      });
+
+//reload app
+location.reload();
+} else {
+  // txt = "You pressed Cancel!";
+}
+
+}

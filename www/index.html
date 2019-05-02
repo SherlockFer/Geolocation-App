@@ -101,7 +101,7 @@
                                             <div id="welcome">Welcome</div>
                                             <div id="welcome">Travel Pal App</div>
                                             <div id="cityWelcome">City</div>
-                                            <div>Today</div>
+                                            <div id="date">date</div>
                                             <div id="temperature">°C</div>
                                             <div id="condition">Temperature condition</div>
 
@@ -109,14 +109,14 @@
                                                 <p class="segmented segmented-round">
 
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(2)">click here to see current location</button>
+                                                        onclick="goScreen(2)">See current location</button>
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(3)">click here to see foreign currency
+                                                        onclick="goScreen(3)">See local currency
                                                         exchange</button>
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(4)">click here to see the current weather</button>
+                                                        onclick="goScreen(4)">See current weather</button>
                                                     <button id="buttons" class="col button button-fill button-round"
-                                                        onclick="goScreen(5)">Click here to take a picture</button>
+                                                        onclick="goScreen(5)">Take a picture</button>
                                                 </p>
 
                                             </div>
@@ -136,7 +136,7 @@
                                             <button id="buttonHome" class="col button button-fill button-round color-orange"
                                                 onclick="goScreen(1)"><i class="fas fa-home"></i></button>
                                             <button id="buttonSave" class="col button button-fill button-round color-green"
-                                                onclick="goScreen(1)"><i class="fas fa-save"></i></button>
+                                                onclick="goScreen(6)"><i class="fas fa-save"></i></button>
                                             
                                         </p>
 
@@ -168,7 +168,7 @@
                                             <button id="buttonHome" class="col button button-fill button-round color-orange"
                                                 onclick="goScreen(1)"><i class="fas fa-home"></i></button>
                                                 <button id="buttonSave" class="col button button-fill button-round color-green"
-                                                onclick="goScreen(1)"><i class="fas fa-save"></i></button>
+                                                onclick="goScreen(6)"><i class="fas fa-save"></i></button>
                                         </p>
 
                                     </div>
@@ -187,10 +187,10 @@
                                                 <div class="row">
                                                     <button class="col button button-fill button-round" id="buttons2"
                                                         onclick="convertA()">
-                                                        From EUR to USD </button>
-                                                    <button class="col button button-fill button-round" id="buttons2"
+                                                        From localCurrency to USD </button>
+                                                    <button class="col button button-fill button-round" id="buttons3"
                                                         onclick="convertB()">
-                                                        From USD to EUR </button>
+                                                        From USD to local Currency </button>
                                                 </div>
                                             </div>
 
@@ -207,13 +207,13 @@
                                         </div>
                                         <div class="rateA">
                                             <!-- see the live rates from dollars to euros -->
-                                            <div id="text"> Current rate (USD to EUR):</div>
-                                            <div id="rateA"> Waiting for the rate USD to EUR...</div>
+                                            <div id="textA"> Current rate (local currency to EUR):</div>
+                                            <div id="rateA"> Waiting for the rate...</div>
                                         </div>
                                         <div class="rateB">
                                             <!-- see the live rates from euros to dollars -->
-                                            <div id="text"> Current rate from (EUR to USD)</div>
-                                            <div id="rateB"> Waiting for the rate EUR to USD...</div>
+                                            <div id="textB"> Current rate from (EUR to local currency)</div>
+                                            <div id="rateB"> Waiting for the rate...</div>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
                                                 <button id="buttonHome" class="col button button-fill button-round color-orange"
                                                     onclick="goScreen(1)"><i class="fas fa-home"></i></button>
                                                     <button id="buttonSave" class="col button button-fill button-round color-green"
-                                                    onclick="goScreen(1)"><i class="fas fa-save"></i></button>
+                                                    onclick="goScreen(6)"><i class="fas fa-save"></i></button>
     
                                                 </p>
 
@@ -287,7 +287,7 @@
                                             <button id="buttonHome" class="col button button-fill button-round color-orange"
                                             onclick="goScreen(1)"><i class="fas fa-home"></i></button>
                                             <button id="buttonSave" class="col button button-fill button-round color-green"
-                                            onclick="goScreen(1)"><i class="fas fa-save"></i></button>
+                                            onclick="goScreen(6)"><i class="fas fa-save"></i></button>
                                         </p>
                                      </div>
                                     <!-- End button to home -->
@@ -298,13 +298,36 @@
                                         <img id="myImage" height="50%" width="50%"></img>
                                 </div>
                             </div>
+
+                            <!-- take a Picture -->  
+                            <div class="swiper-slide" id="screen6">
+                                <div class="page-content">
+                                    <!-- Start buuton to home -->
+                                    <div class="block">
+                                        <p class="segmented segmented-round">
+                                            <button id="buttonHome" class="col button button-fill button-round color-orange"
+                                            onclick="goScreen(1)"><i class="fas fa-home"></i></button>
+                                            <button id="buttonSave" class="col button button-fill button-round color-green"
+                                            onclick="goScreen(6)"><i class="fas fa-save"></i></button>
+                                        </p>
+                                     </div>
+                                    <!-- End button to home -->
+                                        <div id="welcome">Travel Pal App</div>
+                                        <div id="theme">Record data</div>
+                                        <button id="buttonSaveData" class="col button button-fill button-round color-bluegray"
+                                        onclick="readInput()">save data</button>
+                                        <button id="buttonSaveData" class="col button button-fill button-round color-bluegray"
+                                        onclick="readFile(true)">show data</button>
+                                        <button id="buttonSaveData" class="col button button-fill button-round color-bluegray"
+                                        onclick="deleteRecords()">delete all</button>
+                                        <div id="data">status</div>
+                                        <div id="input">data</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
                 <!-- Scrollable page content -->
-
             </div>
         </div>
         <!-- Bottom Toolbar-->
@@ -317,9 +340,7 @@
         </div>
     </div>
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
