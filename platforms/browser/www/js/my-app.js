@@ -16,6 +16,7 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
     tryingFile();
 
+
 });
 
 
@@ -47,6 +48,9 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 currentLoc();
 weather();
 
+
+
+
 //Global variables write and read files
 var fileEntryGlobal;
 var contentGlobal = "";
@@ -57,7 +61,7 @@ var deleteRecord=false;//variable to delete info trips
 var localCurrency="";
 var lat;
 var lon;
-var travel="";
+var travel="Peru";
 
 function currentLoc(){
 
@@ -128,7 +132,9 @@ function currentLoc(){
         document.getElementById('isocode').innerHTML = isocode;
         document.getElementById('date').innerHTML = date;
         document.getElementById('cityWeather').innerHTML = weatherLocation;
-
+      
+        //to call the rate according to iso code (USD) and local currency
+        convert(3);
         //to change bottons and values to local Currency
         document.getElementById('buttons2').innerHTML = "From "+isocode+" to USD";
         document.getElementById('buttons3').innerHTML = "From USD to "+isocode;
@@ -181,6 +187,7 @@ function currentLoc(){
     function error() {
         location.innerHTML = "Unable to retrieve your location";
       }
+
 }
 
 function weather() {
@@ -287,7 +294,7 @@ function convert(id){
             return false;
         }
 
-
+        //rate variable
         var rate =data.quotes[currentCode];
 
         if (id==1){
@@ -297,11 +304,12 @@ function convert(id){
         resultB = parseFloat(Math.round(amount*rate * 100) / 100).toFixed(2);
         document.getElementById('result').innerHTML=resultB+" "+myIsoCode;
         }
-        document.getElementById('rateA').innerHTML=parseFloat(Math.round(1*rate * 100) / 100).toFixed(2);
-        document.getElementById('rateB').innerHTML=parseFloat(Math.round(1/rate * 100) / 100).toFixed(2);
-        
+        var rateA=parseFloat(Math.round(1*rate * 100) / 100).toFixed(2);
+        var rateB=parseFloat(Math.round(1/rate * 100) / 100).toFixed(2);
+        document.getElementById('rateA').innerHTML=rateA;
+        document.getElementById('rateB').innerHTML=rateB;
          //global content
-         textToWrite=textToWrite+" Currency rate exchange: 1 " +myIsocode+" = "+ resultA+"USD";
+         textToWrite=textToWrite+" Currency rate exchange: 1 USD = "+ rateA+" "+myIsoCode;
     
     } else if (request.status <= 500){ 
         // We reached our target server, but it returned an error
@@ -319,6 +327,7 @@ function convert(id){
           console.log("unable to connect to server");        
       };
       request.send();
+
     }
 
     function convertA(){
