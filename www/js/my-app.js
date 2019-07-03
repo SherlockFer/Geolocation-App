@@ -61,7 +61,7 @@ var deleteRecord=false;//variable to delete info trips
 var localCurrency="";
 var lat;
 var lon;
-var travel="Peru";
+var travel="";
 
 function currentLoc(){
 
